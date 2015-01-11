@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - lzqStudio@localhost" uuid="cbd32253-6870-4843-bd8c-6b427af113a7">
+      <secret-storage>master_key</secret-storage>
+      <user-name>idea</user-name>
+      <schema-pattern>lzqStudio.*</schema-pattern>
+      <default-schemas>lzqStudio.*</default-schemas>
+    </data-source>
+  </component>
+</project>

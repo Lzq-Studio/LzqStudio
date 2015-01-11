@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>New And Hot Test</title>
+    <script type="text/javascript" src="script/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="script/jquery.json-2.4.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+       function New(){
+           var request = {
+               "timestamp": new Date().getTime()
+           };
+           var jsonStr = $.toJSON(request);
+           $.ajax({
+               url : "/n/article/getNew",
+               type : "POST",
+               data : jsonStr,
+               dataType : "json",
+               error : function() {
+                   $("#result").html("False");
+               },
+               success : function(data) {
+                   var res="";
+                   for(i=0;i<data.length;i++){
+                       for(var key in data[i]){
+                           res+=key+':'+data[i][key]+' ';
+                           res+="<br/>";
+                       }
+                       res+="<br/>";
+                   }
+                   res+="<br/>";
+                   $("#result").html(res);
+               }
+           });
+       }
+    </script>
+    <script>
+        function Hot(){
+            var request = {
+                "timestamp": new Date().getTime()
+            };
+            var jsonStr = $.toJSON(request);
+            $.ajax({
+                url : "/n/article/getHot",
+                type : "POST",
+                data : jsonStr,
+                dataType : "json",
+                error : function() {
+                    $("#result2").html("False");
+                },
+                success : function(data) {
+                    var res="";
+                    for(i=0;i<data.length;i++){
+                        for(var key in data[i]){
+                            res+=key+':'+data[i][key]+' ';
+                            res+="<br/>";
+                        }
+                        res+="<br/>";
+                    }
+                    res+="<br/>";
+                    $("#result2").html(res);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<form>
+    <h2>最新博客</h2>
+    <table align="center" border="1px" cellspacing="0px" style="border-collapse:collapse" >
+        <tr>
+            <td></td>
+            <td>
+                <button  type=button onclick="New()">New</button>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="result">result</label></td>
+            <td><div id="result" ></div></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>最热博客</h2>
+    <table align="center" border="1px" cellspacing="0px" style="border-collapse:collapse" >
+        <tr>
+            <td></td>
+            <td><button  type=button onclick="Hot()">Hot</button></td>
+        </tr>
+        <tr>
+            <td><label for="result2">result</label></td>
+            <td><div id="result2" ></div></td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>

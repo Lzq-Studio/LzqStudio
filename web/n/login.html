@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        .content{
+            width: 240px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 80px;
+            /* background: red; */
+            background: darkgray;
+        }
+    </style>
+
+    <script type="text/javascript" src="script/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="script/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript">
+
+        function modifyUser(){
+            var request = {
+                "username" : $("#username").val(),
+                "password" : $("#password").val()
+            };
+            var jsonStr = $.toJSON( request );
+            $.ajax({
+                url : "/n/user/login",
+                type : "POST",
+                data : jsonStr,
+                dataType : "json",
+                error : function() {
+                    $("#result").html("False");
+                },
+                success : function(data) {
+                    var back="";
+                    for(i=0;i<data.length;i++){
+                        for(var key in data[i]){
+                            back+=key+':'+data[i][key]+' ';
+                            back+="<br/>";
+                        }
+                        back+="<br/>";
+                    }
+                    back+="<br/>";
+                    $("#result1").html(back);
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="content">
+    <form>
+
+        <hr>
+        <div id="result"></div>
+
+        <hr>
+        <table>
+            <tr>
+                <td colspan="2">login</td>
+            </tr>
+            <tr>
+                <td>userName:</td>
+                <td>
+                    <input type="text" id="username">
+                </td>
+            </tr>
+            <tr>
+                <td>password:</td>
+                <td>
+                    <input type="password" id="password">
+                </td>
+            </tr>
+            <hr>
+            <tr>
+                <td><button  type=button onclick="modifyUser()">login</button></td>
+                <td><button  type="reset">重置</button></td>
+            </tr>
+        </table>
+        <div id="result1"></div>
+        <hr>
+    </form>
+
+</div>
+
+</body>
+</html>

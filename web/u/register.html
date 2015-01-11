@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no" />
+		<title>注册 - 蓝咖之家</title>
+		<meta name="description" content="太原理工大学蓝之青团队" />
+		<meta name="keywords" content="太原理工大学蓝之青团队" />
+
+		<!--[if lt IE 9]>
+    <script src="//static.segmentfault.com/global/js/html5shiv.js?"></script>
+    <script src="//static.segmentfault.com/global/js/respond.js?"></script>
+    <link rel="stylesheet" href="//static.segmentfault.com/global/css/ie.css?" />
+<![endif]-->
+
+		<link rel="stylesheet" href="../css/global.css" />
+		<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body class="login-register">
+
+		<style type="text/css">
+			body {
+				background-color: #f3f3f3;
+			}
+			.header h1 {
+				margin-top: 50px;
+			}
+			.login-link {
+				margin-bottom: 60px;
+			}
+		</style>
+
+		<!--[if lt IE 9]>
+    <div class="error chromeframe">您的浏览器版本<strong>很旧很旧</strong>，为了正常地访问网站，请升级您的浏览器 <a target="_blank" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+		<div class="container">
+			<div class="header text-center">
+				<h1>
+
+            <a href="/" class="logo">
+
+                <img src="../imgs/item_logo.png"  alt="蓝之青">
+
+            </a>
+
+        </h1>
+				<p class="description text-muted">欢迎加入蓝咖之家</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="col-md-6 col-md-offset-3 bg-white login-wrap">
+				<h1 class="h4 text-center login-title">注册新账号</h1>
+				<div class="form-group">
+					<label for="userName" class="required">用户名</label>
+					<input type="text" class="form-control" name="userName" id="userName" placeholder="字母、数字等，用户名唯一">
+				</div>
+				<div class="form-group">
+					<label for="userMail" class="required">Email</label>
+					<input type="text" class="form-control" id="userMail" name="userMail" placeholder="hello@xxx.com">
+				</div>
+				<div class="form-group">
+					<label for="userPass" class="required">密码</label>
+					<input type="password" class="form-control" id="userPass" name="userPass" placeholder="不少于 6 位">
+				</div>
+				<div class="form-group">
+					<label for="userIurl">个人主页</label>
+					<input type="text" class="form-control" id="userIurl" name="userIurl" placeholder="url">
+				</div>
+				<div class="form-group">
+					<label for="">性别</label>
+					</br>
+					<label class="radio-inline">
+						<input type="radio" name="userSex" id="inlineRadio1" value="man">男
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="userSex" id="inlineRadio2" value="woman">女
+					</label>
+				</div>
+				<div class="form-group">
+					<label for="userMood">个人简介</label>
+					<textarea id="userMood" name="userMood" class="form-control" rows="3"></textarea>
+				</div>
+
+				<div class="form-control">
+					<img src="/captcha">
+					<input id="viritycode" type="text" name="captcha" value="" />
+				</div>
+
+				<div class="form-group">
+					<button type="submit" id="submit" class="btn btn-primary btn-block btn-lg" onClick="register()">注册</button>
+				</div>
+			</div>
+
+			<div class="text-center col-md-12 login-link">
+				<a href="/user/login">账号登录</a> |
+				<a href="NewList.html">首页</a> |
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			function register() {
+				var request = {
+					"userName": $("#userName").val(),
+					"userPass": $("#userPass").val(),
+					"userSex": $("input[name='userSex']:checked").val(),
+					"Mood": $("#userMood").val(),
+					"userMail": $("#userMail").val(),
+					"userIurl": $("#userIurl").val(),
+					"idcode":$("#viritycode").val()
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					url: "/n/user/register",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						alert("注册失败！");
+						location.reload();
+					},
+					success: function(data) {
+						if (data[0][2] && data[0][2] == "ok") {
+							alert("注册成功");
+							//window.location.href=document.referrer;
+						} else{
+							alert("注册失败！");	
+							//location.reload();
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

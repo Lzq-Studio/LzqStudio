@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        .content{
+            width: 240px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 80px;
+           /* background: red; */
+            background: darkgray;
+        }
+    </style>
+
+    <script type="text/javascript" src="script/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="script/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript">
+        function register(){
+            var request = {
+                "userName" : $("#userName").val(),
+                "userPass" : $("#userPass").val(),
+                "userSex" : $("#userSex").val(),
+                "Mood" : $("#userMood").val(),
+                "userMail" : $("#userMail").val(),
+                "userIurl" : $("#userIurl").val()
+            };
+            var jsonStr = $.toJSON( request );
+            $.ajax({
+                url : "/user/register",
+                type : "POST",
+                data : jsonStr,
+                dataType : "json",
+                error : function() {
+                    $("#result").html("False");
+                },
+                success : function(data) {
+                    var back="";
+                    for(i=0;i<data.length;i++){
+                        for(var key in data[i]){
+                            back+=key+':'+data[i][key]+' ';
+                            back+="<br/>";
+                        }
+                        back+="<br/>";
+                    }
+                    back+="<br/>";
+                    $("#result").html(back);
+                }
+            });
+        }
+
+
+        function modifyUser(){
+            var request = {
+                "userIdForInfo" : $("#userIdForInfo").val(),
+                "newSex" : $("#newSex").val(),
+                "newMood" : $("#newMood").val(),
+                "newMail" : $("#newMail").val(),
+                "newIurl" : $("#newIurl").val()
+            };
+            var jsonStr = $.toJSON( request );
+            $.ajax({
+                url : "/user/updateUserInfo",
+                type : "POST",
+                data : jsonStr,
+                dataType : "json",
+                error : function() {
+                    $("#result").html("False");
+                },
+                success : function(data) {
+                    var back="";
+                    for(i=0;i<data.length;i++){
+                        for(var key in data[i]){
+                            back+=key+':'+data[i][key]+' ';
+                            back+="<br/>";
+                        }
+                        back+="<br/>";
+                    }
+                    back+="<br/>";
+                    $("#result1").html(back);
+                }
+            });
+        }
+
+
+        function modifyUserPass(){
+            var request = {
+                "userIdForPass" : $("#userIdForPass").val(),
+                "oldPass" : $("#oldPass").val(),
+                "newPass" : $("#newPass").val()
+            };
+            var jsonStr = $.toJSON( request );
+            $.ajax({
+                url : "/user/modifyPassword",
+                type : "POST",
+                data : jsonStr,
+                dataType : "json",
+                error : function() {
+                    $("#result").html("False");
+                },
+                success : function(data) {
+                    var back="";
+                    for(i=0;i<data.length;i++){
+                        for(var key in data[i]){
+                            back+=key+':'+data[i][key]+' ';
+                            back+="<br/>";
+                        }
+                        back+="<br/>";
+                    }
+                    back+="<br/>";
+                    $("#result2").html(back);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div class="content">
+        <form>
+            <table align="center">
+                <tr>
+                    <td colspan="2">用户注册</td>
+                </tr>
+                <tr>
+                    <td>用户名:</td>
+                    <td>
+                        <input type="text" id="userName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td>
+                        <input type="password" id="userPass">
+                    </td>
+                </tr>
+                <tr>
+                    <td>性 别:</td>
+                    <td>
+                        <input type="text" id="userSex">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mood:</td>
+                    <td>
+                        <input type="text" id="userMood">
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮箱:</td>
+                    <td>
+                        <input type="text" id="userMail">
+                    </td>
+                </tr>
+                <tr>
+                    <td>iurl:</td>
+                    <td>
+                        <input type="text" id="userIurl">
+                    </td>
+                </tr>
+                <hr>
+                <tr>
+                    <td><button  type=button onclick="register()">注册</button></td>
+                    <td><button  type="reset">重新填写</button></td>
+                </tr>
+            </table>
+            <hr>
+            <div id="result"></div>
+
+            <hr>
+            <table>
+                <tr>
+                    <td colspan="2">修改用户信息</td>
+                </tr>
+                <tr>
+                    <td>userId:</td>
+                    <td>
+                        <input type="text" id="userIdForInfo">
+                    </td>
+                </tr>
+                <tr>
+                    <td>性 别:</td>
+                    <td>
+                        <input type="text" id="newSex">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mood:</td>
+                    <td>
+                        <input type="text" id="newMood">
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮箱:</td>
+                    <td>
+                        <input type="text" id="newMail">
+                    </td>
+                </tr>
+                <tr>
+                    <td>iurl:</td>
+                    <td>
+                        <input type="text" id="newIurl">
+                    </td>
+                </tr>
+                <hr>
+                <tr>
+                    <td><button  type=button onclick="modifyUser()">确认修改</button></td>
+                    <td><button  type="reset">重置</button></td>
+                </tr>
+            </table>
+                <div id="result1"></div>
+            <hr>
+            <table>
+                <tr>
+                    <td colspan="2">修改用户密码</td>
+                </tr>
+                <tr>
+                    <td>userId:</td>
+                    <td>
+                        <input type="text" id="userIdForPass">
+                    </td>
+                </tr>
+                <tr>
+                    <td>旧密码:</td>
+                    <td>
+                        <input type="text" id="oldPass">
+                    </td>
+                </tr>
+                <tr>
+                    <td>新密码:</td>
+                    <td>
+                        <input type="text" id="newPass">
+                    </td>
+                </tr>
+
+                <hr>
+                <tr>
+                    <td><button  type=button onclick="modifyUserPass()">确认修改</button></td>
+                    <td><button  type="reset">重置</button></td>
+                </tr>
+            </table>
+            <div id="result2"></div>
+        </form>
+
+    </div>
+
+</body>
+</html>

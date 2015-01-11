@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no">
+		<title>蓝咖之家</title>
+		<meta name="description" content="太原理工大学蓝之青团队" />
+		<meta name="keywords" content="太原理工大学蓝之青团队" />
+		<!-- css -->
+		<!--主要引入两个css   global.css 和 qa_all.css-->
+		<!--global.css 又需要请求fonts里面的字体相关文件-->
+		<link rel="stylesheet" href="css/global.css">
+		<link rel="stylesheet" href="css/qa_all.css">
+
+		<!--[if lt IE 9]>
+	    <link rel="stylesheet" href="//static.segmentfault.com/global/css/ie.css?" />
+	    <script src="//static.segmentfault.com/global/js/html5shiv.js?"></script>
+	    <script src="//static.segmentfault.com/global/js/respond.js?"></script>
+		<![endif]-->
+		
+		<!--js-->
+		<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+
+	<body class="qa-index">
+		<!--全局导航-->
+		<div class="global-nav">
+			<nav class="container nav">
+				<h1 class="logo"><a href="#">SegmentFault</a></h1>
+
+				<form action="/search" class="header-search pull-left hidden-sm hidden-xs">
+					<button type="submit" class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span>
+					</button>
+					<input id="searchBox" name="q" placeholder="输入关键字搜索" class="form-control" type="text">
+				</form>
+
+				<ul class="menu list-inline pull-left hidden-xs">
+					<li class="menu__item"><a href="HotList.html">问答</a>
+					</li>
+					<li class="menu__item"><a href="HotList.html">文章</a>
+					</li>
+					<li class="menu__item"><a href="">资源</a>
+					</li>
+				</ul>
+				<ul class="opts pull-right list-inline hidden-xs" id="isLogin">
+					<li class="opts__item"><a id="sfLogin" href="u/login.html" class="em ml10">直接登录</a>
+					</li>
+					<li class="opts__item"><a id="sfLogin" href="u/register.html" class="em ml10">注册</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!--全局导航结束-->
+
+		<!--主要内容-->
+
+		<div class="wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-md-9 main">
+						<p class="main-title hidden-xs">
+							今天，你在开发时遇到了什么问题呢？
+							<a id="goAsk" href="a/create.html" class="btn btn-primary">我要提问</a>
+						</p>
+						<!--最新最热标签-->
+						<ul class="nav nav-tabs nav-tabs-zen mb10">
+							<li><a href="NewList.html">最新的</a>
+							</li>
+							<li class="active"><a href="HotList.html">热门的</a>
+							</li>
+						</ul>
+						<!-- 博客列表格式 -->
+						<div class="stream-list question-stream" id="hot">
+						</div>
+
+						<!--全部问题-->
+						<div class="text-center">
+							<ul class="pager">
+								<li>以上是部分更新，你还可以查看</li>
+								<li><a class="all_g" href="All.html">全部问题</a>
+								</li>
+								<li>或者</li>
+								<li><a class="all_g" href="HotList.html">热门问题</a>
+								</li>
+								<li>列表</li>
+							</ul>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--foot-->
+
+		<footer id="footer">
+			<div class="container">
+				<div class="row hidden-xs">
+					<dl class="col-sm-2 site-link">
+						<dt>网站相关</dt>
+						<dd><a href="#">关于我们</a>
+						</dd>
+						<dd><a href="#">服务条款</a>
+						</dd>
+						<dd><a href="#">帮助中心</a>
+						</dd>
+						<dd><a href="#">声望与权限</a>
+						</dd>
+						<dd><a href="#">编辑器语法</a>
+						</dd>
+						<dd><a href="#">每周精选</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>联系合作</dt>
+						<dd><a href="#">联系我们</a>
+						</dd>
+						<dd><a href="#">加入我们</a>
+						</dd>
+						<dd><a href="#">合作伙伴</a>
+						</dd>
+						<dd><a href="#">媒体报道</a>
+						</dd>
+						<dd><a href="#">建议反馈</a>
+						</dd>
+						<dd><a href="#" target="_blank">Logo 下载</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>常用链接</dt>
+						<dd><a href="#">问答订阅</a>
+						</dd>
+						<dd><a href="#">文章订阅</a>
+						</dd>
+						<dd><a href="#" target="_blank">文档镜像</a>
+						</dd>
+						<dd><a href="#">黑客马拉松</a>
+						</dd>
+						<dd><a href="#">一起涨姿势</a>
+						</dd>
+						<dd><a href="#" target="_blank">域名搜索注册</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>关注我们</dt>
+						<dd><a href="#" target="_blank">Twitter</a>
+						</dd>
+						<dd><a href="#" target="_blank">人人网</a>
+						</dd>
+						<dd><a href="#" target="_blank">新浪微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">腾讯微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">开发日志</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-4 site-link" id="license">
+						<dt>内容许可</dt>
+					</dl>
+				</div>
+				<div class="copyright">
+					Copyright © 2011-2014 蓝之青. 当前呈现版本 0.0.1
+					<br>
+				</div>
+			</div>
+		</footer>
+
+	</body>
+
+	<script type="text/javascript">
+	//请求最热文章
+			var request = {
+				"timestamp": new Date().getTime()
+			};
+			var jsonStr = $.toJSON(request);
+			$.ajax({
+				url: "/n/article/getHot",
+				type: "POST",
+				data: jsonStr,
+				dataType: "json",
+				error: function() {
+					$("#hot").html("请求失败");
+				},
+				success: function(data) {
+					var restitle = "";
+					var rescontent = "";
+					var resdate = "";
+					var resartid = "";
+					var resusername = "";
+					var begin = "<section class='stream-list__item'><div class='summary'><ul class='author list-inline'><li>";
+					var end = "	</div></section>";
+					$.each(data, function(idx, item) {
+						resusername = "<a href=''>" + item.userName + "</a>";
+						resdate = "<span class='split'></span><span class='askDate'>" + item.preDate + "</span></li></ul>";
+						restitle = "<h2 class='title'><a href='javascript:content(" + item.artId + ")'>" + item.title + "</a></h2>";
+						$('#hot').append(begin + resusername + resdate + restitle + end);
+					});
+				}
+			});
+		//判断是否登录。请求后台
+			$.ajax({
+				type:"get",
+				url:"/n/user/isLogin",
+				datatype:"json",
+				error: function() {
+					var isLogin = false;
+				},
+				success:function(data){
+					$.each(data, function(idx,item) {
+						if(item.userid){
+							$(".opts__item").hide();
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='"+item.userid+"' class='em ml10'>"+item.username+"</a></li>");
+						}
+					});
+				}
+			});
+
+		function content(id) {
+			window.open("a/topic.html?id=" + id);
+		}
+
+	</script>
+</html>

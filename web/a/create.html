@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no">
+		<title>提问-发表心得</title>
+		<meta name="description" content="太原理工大学蓝之青团队" />
+		<meta name="keywords" content="太原理工大学蓝之青团队" />
+
+		<!--全局样式+编辑器样式-->
+		<link rel="stylesheet" type="text/css" href="../css/global.css" />
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap-markdown.min.css" />
+		<!--自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/ntopic.css" />
+
+		<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--编辑器相关-->
+		<script src="../js/markdown.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap-markdown.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/to-markdown.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+
+	<body>
+
+		<!--全局导航-->
+		<div class="global-nav">
+			<nav class="container nav">
+				<h1 class="logo"><a href="#">SegmentFault</a></h1>
+
+				<form action="/search" class="header-search pull-left hidden-sm hidden-xs">
+					<button type="submit" class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span>
+					</button>
+					<input id="searchBox" name="q" placeholder="输入关键字搜索" class="form-control" type="text">
+				</form>
+
+				<ul class="menu list-inline pull-left hidden-xs">
+					<li class="menu__item"><a href="../HotList.html">问答</a>
+					</li>
+					<li class="menu__item"><a href="../HotList.html">文章</a>
+					</li>
+					<li class="menu__item"><a href="">资源</a>
+					</li>
+				</ul>
+				<ul class="opts pull-right list-inline hidden-xs" id="isLogin">
+					<li class="opts__item"><a id="sfLogin" href="/u/login.html" class="em ml10">直接登录</a>
+					</li>
+					<li class="opts__item"><a id="sfLogin" href="/u/register.html" class="em ml10">注册</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!--全局导航结束-->
+
+
+		<div class="post-topheader">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li>返回首页</li>
+					<li>发表-提问</li>
+				</ol>
+				<h1 class="h3 title">提出你的问题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发表你的见解</h1>
+				<div class="author">
+					<strong id="author"></strong>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-9">
+					<form role="form" class="form_g">
+						<div class="form-group">
+							<label for="title-text">标题：</label>
+							<input type="text" class="form-control" id="title" placeholder="输入标题">
+						</div>
+						<label for="title-text">内容：</label>
+						<textarea name="content" data-provide="markdown" class="form-control status-box" rows="10"></textarea>
+					</form>
+					<div class="bt_g">
+						<button id="submit" type="button" class="btn btn-primary">发表</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--foot-->
+		<!--foot-->
+
+		<footer id="footer">
+			<div class="container">
+				<div class="row hidden-xs">
+					<dl class="col-sm-2 site-link">
+						<dt>网站相关</dt>
+						<dd><a href="#">关于我们</a>
+						</dd>
+						<dd><a href="#">服务条款</a>
+						</dd>
+						<dd><a href="#">帮助中心</a>
+						</dd>
+						<dd><a href="#">声望与权限</a>
+						</dd>
+						<dd><a href="#">编辑器语法</a>
+						</dd>
+						<dd><a href="#">每周精选</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>联系合作</dt>
+						<dd><a href="#">联系我们</a>
+						</dd>
+						<dd><a href="#">加入我们</a>
+						</dd>
+						<dd><a href="#">合作伙伴</a>
+						</dd>
+						<dd><a href="#">媒体报道</a>
+						</dd>
+						<dd><a href="#">建议反馈</a>
+						</dd>
+						<dd><a href="#" target="_blank">Logo 下载</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>常用链接</dt>
+						<dd><a href="#">问答订阅</a>
+						</dd>
+						<dd><a href="#">文章订阅</a>
+						</dd>
+						<dd><a href="#" target="_blank">文档镜像</a>
+						</dd>
+						<dd><a href="#">黑客马拉松</a>
+						</dd>
+						<dd><a href="#">一起涨姿势</a>
+						</dd>
+						<dd><a href="#" target="_blank">域名搜索注册</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>关注我们</dt>
+						<dd><a href="#" target="_blank">Twitter</a>
+						</dd>
+						<dd><a href="#" target="_blank">人人网</a>
+						</dd>
+						<dd><a href="#" target="_blank">新浪微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">腾讯微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">开发日志</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-4 site-link" id="license">
+						<dt>内容许可</dt>
+					</dl>
+				</div>
+				<div class="copyright">
+					Copyright © 2011-2014 蓝之青. 当前呈现版本 0.0.1
+					<br>
+				</div>
+			</div>
+		</footer>
+		<!--foot结束-->
+
+
+
+		<script type="text/javascript">
+			var return_id = "";
+
+			 //初始化编辑器
+			var md_content;
+			$("#submit").click(function(e) {
+				md_content_n = $('.status-box').data('markdown').getContent()
+				md_content = $('.status-box').data('markdown').parseContent();
+				md_content = md_content.replace(/=/g, "*");
+				
+				var title_t = $('#title').val();
+				if ($.trim(title_t) != ""){
+					if($.trim(md_content_n) != ""){
+						add($.trim(title_t),md_content);
+					}else{
+						alert("内容呢？亲？");
+					}
+				}else{
+					alert("标题呢？亲");
+				}
+			});
+
+
+
+
+			 //判断是否登录。请求后台   并且  修改右上角+加入姓名
+			$.ajax({
+				type: "get",
+				url: "/n/user/isLogin",
+				datatype: "json",
+				error: function() {
+					var isLogin = false;
+					noLogin();
+				},
+				success: function(data) {
+					$.each(data, function(idx, item) {
+						if (item.userid) {
+							$(".opts__item").hide();
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#author').html(item.username);
+						} else {
+							noLogin();
+						}
+
+					});
+				}
+			});
+
+			 //如果没有登录
+			function noLogin() {
+				alert("没有登录,请登录后再发表。");
+				window.location.href = "../u/login.html";
+			}
+
+			 //添加。。。。
+			function add(title, content) {
+				var request = {
+					"title": title,
+					"content": content
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					url: "/n/article/addArticle",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						alert("失败！！！！");
+					},
+					success: function(data) {
+						if (data[0][2] == 'ok' && data[0]['dataId']) {
+							alert("发表成功");
+							window.location.href = "../a/topic.html?id=" + data[0]['dataId']; //发表成功后自动跳转到查看界面
+						} else {
+							alert("失败！！");
+						}
+					}
+				});
+			}
+		</script>
+
+	</body>
+
+</html>

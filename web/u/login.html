@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="太原理工大学蓝之青团队" />
+		<meta name="keywords" content="太原理工大学蓝之青团队" />
+		<title>登录-蓝咖之家</title>
+		
+		<!--global 里面包含了 bootstrap.css-->
+		<link rel="stylesheet" type="text/css" href="../css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/qa_all.css"/>
+		
+		<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
+		
+    <style>
+		h2{
+			font-family: "微软雅黑";
+		}
+		.title{
+			text-align: center;
+			margin-top: 50px;
+			margin-bottom: 30px;
+		}
+		.login{
+			text-align: center;
+			width: 400px;
+			margin-left: 322px;
+			margin-bottom: 40px;
+		}
+    </style>
+</head>
+<body>
+
+
+	<!--全局导航-->
+		<div class="global-nav">
+			<nav class="container nav">
+				<h1 class="logo"><a href="#">SegmentFault</a></h1>
+
+				<form action="/search" class="header-search pull-left hidden-sm hidden-xs">
+					<button type="submit" class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span>
+					</button>
+					<input id="searchBox" name="q" placeholder="输入关键字搜索" class="form-control" type="text">
+				</form>
+
+				<ul class="menu list-inline pull-left hidden-xs">
+					<li class="menu__item"><a href="../HotList.html">问答</a>
+					</li>
+					<li class="menu__item"><a href="../HotList.html">文章</a>
+					</li>
+					<li class="menu__item"><a href="">资源</a>
+					</li>
+				</ul>
+				<ul class="opts pull-right list-inline hidden-xs" id="isLogin">
+					<li class="opts__item"><a id="sfLogin" href="/u/login.html" class="em ml10">直接登录</a>
+					</li>
+					<li class="opts__item"><a id="sfLogin" href="/u/register.html" class="em ml10">注册</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!--全局导航结束-->
+
+
+
+
+
+ <!-- 登陆 -->
+
+
+<div class="container">
+	<div class="login">
+	<div class="title">
+		<span class="h2">登陆</span>
+	</div>
+	  	<div class="form-group">
+	      <label for="username">用户名：</label>
+	      <input type="text" class="form-control" name="username" id="username" placeholder="Enter username"/>
+	  	</div>
+	  	<div class="form-group">
+		  <label for="password">密码：</label>
+		  <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+	  	</div>
+	  	<div class="button" style="text-align: center;">
+	  		<button type="submit" class="btn btn-default" id="login" onclick="modifyUser()">登陆</button>
+	  	</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+document.onkeyup = function (event) {
+            var e = event || window.event;
+            var keyCode = e.keyCode || e.which;
+            if(keyCode == 13){
+            	modifyUser();
+            }
+        }
+function modifyUser(){
+            var request = {
+                "username" : $("#username").val(),
+                "password" : $("#password").val()
+            };
+            var jsonStr = $.toJSON( request );
+            $.ajax({
+                url : "/n/user/login",
+                type : "POST",
+                data : jsonStr,
+                dataType : "json",
+                error : function() {
+                	alert("error")
+                },
+                success : function(data) {
+					if (data[0][5] && data[0][5] == "ok") {
+						window.location.href=document.referrer;
+					} else{
+						alert("登录失败，请重新登录");
+					}
+                }
+            });
+        }
+
+</script>
+
+
+		<!--foot-->
+
+				<!--foot-->
+
+		<footer id="footer">
+			<div class="container">
+				<div class="row hidden-xs">
+					<dl class="col-sm-2 site-link">
+						<dt>网站相关</dt>
+						<dd><a href="#">关于我们</a>
+						</dd>
+						<dd><a href="#">服务条款</a>
+						</dd>
+						<dd><a href="#">帮助中心</a>
+						</dd>
+						<dd><a href="#">声望与权限</a>
+						</dd>
+						<dd><a href="#">编辑器语法</a>
+						</dd>
+						<dd><a href="#">每周精选</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>联系合作</dt>
+						<dd><a href="#">联系我们</a>
+						</dd>
+						<dd><a href="#">加入我们</a>
+						</dd>
+						<dd><a href="#">合作伙伴</a>
+						</dd>
+						<dd><a href="#">媒体报道</a>
+						</dd>
+						<dd><a href="#">建议反馈</a>
+						</dd>
+						<dd><a href="#" target="_blank">Logo 下载</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>常用链接</dt>
+						<dd><a href="#">问答订阅</a>
+						</dd>
+						<dd><a href="#">文章订阅</a>
+						</dd>
+						<dd><a href="#" target="_blank">文档镜像</a>
+						</dd>
+						<dd><a href="#">黑客马拉松</a>
+						</dd>
+						<dd><a href="#">一起涨姿势</a>
+						</dd>
+						<dd><a href="#" target="_blank">域名搜索注册</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>关注我们</dt>
+						<dd><a href="#" target="_blank">Twitter</a>
+						</dd>
+						<dd><a href="#" target="_blank">人人网</a>
+						</dd>
+						<dd><a href="#" target="_blank">新浪微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">腾讯微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">开发日志</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-4 site-link" id="license">
+						<dt>内容许可</dt>
+					</dl>
+				</div>
+				<div class="copyright">
+					Copyright © 2011-2014 蓝之青. 当前呈现版本 0.0.1
+					<br>
+				</div>
+			</div>
+		</footer>
+
+		<!--foot结束-->
+</body>
+</html>

@@ -1,0 +1,7 @@
+1:error     查询失败
+2:error     提交失败    2:ok    提交成功
+3:error     用户名错误
+4:error     密码错误
+5:error     未登录     5:ok    已登录
+500:error   抛异常
+501:error   提交数据不完整

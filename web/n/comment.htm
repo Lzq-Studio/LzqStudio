@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title>Comment Test</title>
+	<script type="text/javascript" src="script/jquery-2.1.0.min.js"></script>
+  <script type="text/javascript" src="script/jquery.json-2.4.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<script type="text/javascript">
+function qurery() {
+    var request = {
+            "timestamp": new Date().getTime(),
+            "dataId" : $("#commentId").val()
+    };
+    var jsonStr = $.toJSON( request );
+    $.ajax({
+        url : "/n/comment/query",
+        type : "POST",
+        data : jsonStr,
+        dataType : "json",
+        error : function() {
+            $("#result").html("False");
+        },
+        success : function(data) {
+        var back="";
+        for(i=0;i<data.length;i++){
+          for(var key in data[i]){
+            back+=key+':'+data[i][key]+' ';
+           back+="<br/>";
+         }
+           back+="<br/>";
+        }
+        back+="<br/>";
+        $("#result").html(back);
+        }
+    });
+}
+</script>
+<script type="text/javascript">
+function save() {
+    var request = {
+            "timestamp": new Date().getTime(),
+            "dataId":$("#commentId").val(),
+            "userName":"ManDaRen",
+            "content":"今天心情不错"
+    };
+    var jsonStr = $.toJSON(request);
+    $.ajax({
+        url : "/n/comment/submit",
+        type : "POST",
+        data : jsonStr,
+        dataType : "json",
+        error : function() {
+            $("#result").html("False");
+        },
+        success : function(data) {
+        var back="";
+        for(i=0;i<data.length;i++){
+          for(var key in data[i]){
+            back+=key+':'+data[i][key]+' ';
+           back+="<br/>";
+         }
+           back+="<br/>";
+        }
+        back+="<br/>";
+        $("#result").html(back);
+        }
+    });
+}
+</script>
+
+
+<body>
+<form>
+  <table align="center" border="1px" cellspacing="0px" style="border-collapse:collapse" >
+    <tr>
+    <td>articleId</td>
+     <td> <label><input id="commentId" type="text" required /> </label></td>
+   </tr>
+    <tr>
+    <td>&nbsp</td>
+    <td><button  type=button onclick="qurery()">query</button></td>
+  </tr>
+  <tr>
+    <td>&nbsp</td>
+    <td><button  type=button onclick="save()">save</button></td>
+  </tr>
+</table>
+</form>
+    <div id="result" >result: </div>  
+</body>
+</html>

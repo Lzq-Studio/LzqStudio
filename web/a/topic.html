@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no">
+		<title></title>
+		<meta name="description" content="太原理工大学蓝之青团队" />
+		<meta name="keywords" content="太原理工大学蓝之青团队" />
+
+		<!--引入css-->
+		<link rel="stylesheet" type="text/css" href="../css/global.css" />
+		<link rel="stylesheet" type="text/css" href="../css/qa_all.css" />
+
+		<!--jquery和解析json的jquery-->
+		<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--编辑器相关-->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap-markdown.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/ntopic.css" />
+		<script src="../js/markdown.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap-markdown.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/to-markdown.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<style type="text/css">
+			.md-editor > textarea {
+				height: 200px;
+			}
+		</style>
+
+		<!--全局导航-->
+		<div class="global-nav">
+			<nav class="container nav">
+				<h1 class="logo"><a href="#">SegmentFault</a></h1>
+
+				<form action="/search" class="header-search pull-left hidden-sm hidden-xs">
+					<button type="submit" class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span>
+					</button>
+					<input id="searchBox" name="q" placeholder="输入关键字搜索" class="form-control" type="text">
+				</form>
+
+				<ul class="menu list-inline pull-left hidden-xs">
+					<li class="menu__item"><a href="../HotList.html">问答</a>
+					</li>
+					<li class="menu__item"><a href="../HotList.html">文章</a>
+					</li>
+					<li class="menu__item"><a href="">资源</a>
+					</li>
+				</ul>
+				<ul class="opts pull-right list-inline hidden-xs" id="isLogin">
+					<li class="opts__item"><a id="sfLogin" href="/u/login.html" class="em ml10">直接登录</a>
+					</li>
+					<li class="opts__item"><a id="sfLogin" href="/u/register.html" class="em ml10">注册</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!--全局导航结束-->
+
+		<div class="post-topheader">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li>返回首页</li>
+					<li>详情</li>
+				</ol>
+				<h1 class="h3 title" id="title_g"></h1>
+				<div class="author">
+					<a class="mr5" href="">
+						<strong id="author_g"></strong>
+					</a>
+					<strong class="text-black mr10" id="clicknum_g"></strong><span id="time_g"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="container mt30">
+			<div class="col-xs-12 col-md-9 main">
+				<!--内容-->
+				<article class="widget-question__item">
+					<div class="post-offset">
+						<div class="question fmt">
+							<p id="content_g"></p>
+						</div>
+						<!--标签-->
+						<!--<ul class="taglist--inline mb20">
+							<li class="tagPopup">
+								<a class="tag" data-img="http://sfault-avatar.b0.upaiyun.com/120/493/1204937357-1040000000089846_huge100" data-id="1040000000089846" data-original-title="数据库" data-placement="top" data-toggle="popover" href="/t/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+							</li>
+						</ul>-->
+						<div class="post-opt">
+							<ul class="list-inline mb0">
+								<li>
+									<a class="comments"> 评论</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</article>
+
+				<!--评论-->
+				<div class="widget-answers" id="ans_g">
+					<h2 id="answers-title" class="title h4 mt30 mb20 post-title"></h2>
+
+
+
+
+
+				</div>
+
+
+				<form role="form" class="form_g">
+					<div class="alert alert-danger" role="alert" id="al_login" style="display:none;">请登录后再发表。。。。。</div>
+					<div class="form-group">
+						<label class="h4">撰写回复：</label>
+					</div>
+					<textarea name="content" data-provide="markdown" class="form-control status-box" rows="10"></textarea>
+				</form>
+				<div class="bt_g">
+					<button id="submit_g" type="button" class="btn btn-primary">发表</button>
+				</div>
+
+			</div>
+		</div>
+
+		<!--foot-->
+
+		<!--foot-->
+
+		<footer id="footer">
+			<div class="container">
+				<div class="row hidden-xs">
+					<dl class="col-sm-2 site-link">
+						<dt>网站相关</dt>
+						<dd><a href="#">关于我们</a>
+						</dd>
+						<dd><a href="#">服务条款</a>
+						</dd>
+						<dd><a href="#">帮助中心</a>
+						</dd>
+						<dd><a href="#">声望与权限</a>
+						</dd>
+						<dd><a href="#">编辑器语法</a>
+						</dd>
+						<dd><a href="#">每周精选</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>联系合作</dt>
+						<dd><a href="#">联系我们</a>
+						</dd>
+						<dd><a href="#">加入我们</a>
+						</dd>
+						<dd><a href="#">合作伙伴</a>
+						</dd>
+						<dd><a href="#">媒体报道</a>
+						</dd>
+						<dd><a href="#">建议反馈</a>
+						</dd>
+						<dd><a href="#" target="_blank">Logo 下载</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>常用链接</dt>
+						<dd><a href="#">问答订阅</a>
+						</dd>
+						<dd><a href="#">文章订阅</a>
+						</dd>
+						<dd><a href="#" target="_blank">文档镜像</a>
+						</dd>
+						<dd><a href="#">黑客马拉松</a>
+						</dd>
+						<dd><a href="#">一起涨姿势</a>
+						</dd>
+						<dd><a href="#" target="_blank">域名搜索注册</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-2 site-link">
+						<dt>关注我们</dt>
+						<dd><a href="#" target="_blank">Twitter</a>
+						</dd>
+						<dd><a href="#" target="_blank">人人网</a>
+						</dd>
+						<dd><a href="#" target="_blank">新浪微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">腾讯微博</a>
+						</dd>
+						<dd><a href="#" target="_blank">开发日志</a>
+						</dd>
+					</dl>
+					<dl class="col-sm-4 site-link" id="license">
+						<dt>内容许可</dt>
+					</dl>
+				</div>
+				<div class="copyright">
+					Copyright © 2011-2014 蓝之青. 当前呈现版本 0.0.1
+					<br>
+				</div>
+			</div>
+		</footer>
+
+		<!--foot结束-->
+
+
+		<script language="javascript">
+			 //获取id  url 传值
+			var key = "";
+			var url = location.href.split("?");
+			if (url[1] == null) {
+				window.location.href = "../NewList.html";
+			}
+			var field = url[1].split("&");
+			for (i = 0; i < field.length; i++) {
+				var val = field[i].split("=");
+				if (val[0] == key) {
+					id = val[1];
+				}
+			}
+			getConten(val[1]); //通过url 中的id 获取内容页
+
+			 //判断是否登录。请求后台   并且  修改右上角+加入姓名
+			$.ajax({
+				type: "get",
+				url: "/n/user/isLogin",
+				datatype: "json",
+				error: function() {
+					var isLogin = false;
+					noLogin();
+				},
+				success: function(data) {
+					$.each(data, function(idx, item) {
+						if (item.userid) {
+							$(".opts__item").hide();
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#author').html(item.username);
+							nowUser = item.username;
+						} else {
+							noLogin();
+						}
+
+					});
+				}
+			});
+
+			 //提交评论
+			var md_content;
+			$("#submit_g").click(function(e) {
+				md_content_n = $('.status-box').data('markdown').getContent()
+				md_content = $('.status-box').data('markdown').parseContent();
+				md_content = md_content.replace(/=/g, "*");
+
+				if ($.trim(md_content_n) != "") {
+					addComment(nowUser, md_content, val[1])
+					$('.status-box').data('markdown').setContent()
+				}else{
+					alert("回复的内容呢？只有空格是不行滴啦。。。");
+				}
+
+			});
+
+			 //没有登录的时候
+			function noLogin() {
+				$('#submit_g').attr('disabled', "true");
+				$('#al_login').show();
+			}
+
+
+			 //				获取内容  函数 传值 文章id
+			function getConten(dataId) {
+				var request = {
+					"dataId": dataId
+				};
+				var jsonStr = $.toJSON(request);
+
+				$.ajax({
+					url: "/n/article/getArticle",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						$("#result").html("False");
+					},
+					success: function(data) {
+						$.each(data, function(idx, item) {
+							item.content = item.content.replace(/\*/g, "=");
+							$('#title_g').html(item.title);
+							$('#content_g').html(item.content);
+							$('#author_g').html(item.userName);
+							$('#clicknum_g').html(item.clickNum);
+							$('#time_g').html(item.preDate);
+							document.title = item.title;
+							getComment(item.artId); //获取内容页的评论
+						});
+					}
+				});
+
+			}
+
+
+			 //内容页评论获取函数  传值  文章id
+			function getComment(atrId) {
+				var request = {
+					"timestamp": new Date().getTime(),
+					"dataId": atrId
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					url: "/n/comment/query",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						alert("评论请求失败");
+					},
+					success: function(data) {
+						var commentContent = "";
+						var commentPreDate = "";
+						var commentUserName = "";
+						var begin = "<article class='clearfix widget-answers__item'><div class='post-offset'>";
+						var end = "</div></article>";
+						$.each(data, function(idx, item) {
+							if (item.userName) {
+								commentUserName = "<strong><a class='mr5' href='' id='commentAuthor_g'>" + item.userName + "</a></strong>";
+								commentPreDate = "<span class='ml10 text-muted' id='ansTime_g'> " + item.preDate + " </span>";
+								commentContent = "<div class='answer fmt mt10'><p id='commentContent_g'>" + item.content.replace(/\*/g, "=") + "</p></div>";
+								$('#ans_g').append(begin + commentUserName + commentPreDate + commentContent + end);
+
+							}
+							num = idx;
+							$('#answers-title').html(num + "个回答");
+						});
+					}
+				});
+			}
+
+			 //发表评论
+			function addComment(userName, content, dataId) {
+				var request = {
+					"timestamp": new Date().getTime(),
+					"dataId": dataId,
+					"userName": userName,
+					"content": content
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					url: "/n/comment/submit",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						alert("发表失败");
+					},
+					success: function(data) {
+						if (data[0][2] == "ok") {
+							location.reload()
+						} else {
+							alert("发表失败");
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>
