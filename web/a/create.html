@@ -206,7 +206,7 @@
 					$.each(data, function(idx, item) {
 						if (item.userid) {
 							$(".opts__item").hide();
-							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' target='_blank' href='/u/user.html'" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
 							$('#author').html(item.username);
 						} else {
 							noLogin();

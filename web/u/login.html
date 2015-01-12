@@ -2,42 +2,43 @@
 <html lang="zh-cn">
 
 	<head>
-		
+
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="太原理工大学蓝之青团队" />
 		<meta name="keywords" content="太原理工大学蓝之青团队" />
 		<title>登录-蓝咖之家</title>
-		
+
 		<!--global 里面包含了 bootstrap.css-->
-		<link rel="stylesheet" type="text/css" href="../css/global.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/qa_all.css"/>
-		
+		<link rel="stylesheet" type="text/css" href="../css/global.css" />
+		<link rel="stylesheet" type="text/css" href="../css/qa_all.css" />
+
 		<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
-		
-    <style>
-		h2{
-			font-family: "微软雅黑";
-		}
-		.title{
-			text-align: center;
-			margin-top: 50px;
-			margin-bottom: 30px;
-		}
-		.login{
-			text-align: center;
-			width: 400px;
-			margin-left: 322px;
-			margin-bottom: 40px;
-		}
-    </style>
-</head>
-<body>
+
+		<style>
+			h2 {
+				font-family: "微软雅黑";
+			}
+			.title {
+				text-align: center;
+				margin-top: 50px;
+				margin-bottom: 30px;
+			}
+			.login {
+				text-align: center;
+				width: 400px;
+				margin-left: 322px;
+				margin-bottom: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
 
 
-	<!--全局导航-->
+		<!--全局导航-->
 		<div class="global-nav">
 			<nav class="container nav">
 				<h1 class="logo"><a href="#">SegmentFault</a></h1>
@@ -71,67 +72,108 @@
 
 
 
- <!-- 登陆 -->
+		<!-- 登陆 -->
 
 
-<div class="container">
-	<div class="login">
-	<div class="title">
-		<span class="h2">登陆</span>
-	</div>
-	  	<div class="form-group">
-	      <label for="username">用户名：</label>
-	      <input type="text" class="form-control" name="username" id="username" placeholder="Enter username"/>
-	  	</div>
-	  	<div class="form-group">
-		  <label for="password">密码：</label>
-		  <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
-	  	</div>
-	  	<div class="button" style="text-align: center;">
-	  		<button type="submit" class="btn btn-default" id="login" onclick="modifyUser()">登陆</button>
-	  	</div>
-	</div>
-</div>
+		<div class="container">
+			<div class="login">
+				<div class="title">
+					<span class="h2">登陆</span>
+				</div>
+				<div class="form-group">
+					<label for="username">用户名：</label>
+					<input type="text" class="form-control" name="username" id="username" placeholder="Enter username" />
+				</div>
+				<div class="form-group">
+					<label for="password">密码：</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+				</div>
+				<div class="button" style="text-align: center;">
+					<button type="submit" class="btn btn-default" id="login" onclick="modifyUser()">登陆</button>
+				</div>
+			</div>
+		</div>
 
-<script type="text/javascript">
+		<!--已经登录弹窗-->
+		<div class="modal fade" id="alreadyLogin">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title">登录状态</h4>
+					</div>
+					<div class="modal-body">
+						<p>您已经登录&hellip;将前往您的个人首页</p>
+					</div>
+					<div class="modal-footer">
+						<button id="close" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-document.onkeyup = function (event) {
-            var e = event || window.event;
-            var keyCode = e.keyCode || e.which;
-            if(keyCode == 13){
-            	modifyUser();
-            }
-        }
-function modifyUser(){
-            var request = {
-                "username" : $("#username").val(),
-                "password" : $("#password").val()
-            };
-            var jsonStr = $.toJSON( request );
-            $.ajax({
-                url : "/n/user/login",
-                type : "POST",
-                data : jsonStr,
-                dataType : "json",
-                error : function() {
-                	alert("error")
-                },
-                success : function(data) {
-					if (data[0][5] && data[0][5] == "ok") {
-						window.location.href=document.referrer;
-					} else{
-						alert("登录失败，请重新登录");
+		<!--相关弹窗是否登录-->
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/modal.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/transition.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			 //判断登录
+			$.ajax({
+				type: "get",
+				url: "/n/user/isLogin",
+				datatype: "json",
+				error: function() {},
+				success: function(data) {
+					$.each(data, function(idx, item) {
+						if (item.userid) {
+							$(".opts__item").hide();
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$("#alreadyLogin").modal("toggle");
+							$('#alreadyLogin').on('hidden.bs.modal', function (e) {
+								window.location.href = "user.html";
+							})
+						}
+					});
+				}
+			});
+
+			document.onkeyup = function(event) {
+				var e = event || window.event;
+				var keyCode = e.keyCode || e.which;
+				if (keyCode == 13) {
+					modifyUser();
+				}
+			}
+
+			function modifyUser() {
+				var request = {
+					"username": $("#username").val(),
+					"password": $("#password").val()
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					url: "/n/user/login",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						alert("error")
+					},
+					success: function(data) {
+						if (data[0][5] && data[0][5] == "ok") {
+							window.location.href = document.referrer;
+						} else {
+							alert("登录失败，请重新登录");
+						}
 					}
-                }
-            });
-        }
-
-</script>
+				});
+			}
+		</script>
 
 
 		<!--foot-->
-
-				<!--foot-->
 
 		<footer id="footer">
 			<div class="container">
@@ -206,5 +248,6 @@ function modifyUser(){
 		</footer>
 
 		<!--foot结束-->
-</body>
+	</body>
+
 </html>

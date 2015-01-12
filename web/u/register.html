@@ -83,11 +83,12 @@
 				</div>
 				<div class="form-group">
 					<label for="userMood">个人简介</label>
-					<textarea id="userMood" name="userMood" class="form-control" rows="3"></textarea>
+					<textarea id="userMood" name="userMood" class="form-control" rows="3" style="resize: none;"></textarea>
 				</div>
 
-				<div class="form-control">
-					<img src="/captcha">
+				<div class="form-group">
+					<label for="">验证码：</label>
+					<img id="viritycode_img" src="/captcha">
 					<input id="viritycode" type="text" name="captcha" value="" />
 				</div>
 
@@ -108,7 +109,7 @@
 					"userName": $("#userName").val(),
 					"userPass": $("#userPass").val(),
 					"userSex": $("input[name='userSex']:checked").val(),
-					"Mood": $("#userMood").val(),
+					"userMood": $("#userMood").val(),
 					"userMail": $("#userMail").val(),
 					"userIurl": $("#userIurl").val(),
 					"idcode":$("#viritycode").val()
@@ -126,10 +127,16 @@
 					success: function(data) {
 						if (data[0][2] && data[0][2] == "ok") {
 							alert("注册成功");
-							//window.location.href=document.referrer;
-						} else{
-							alert("注册失败！");	
-							//location.reload();
+							window.location.href = "/u/login.html";
+						}else if(data[0][6] == "error"){
+							alert("验证码出错！");
+							$("#viritycode_img").attr("src", "/captcha?image="+new Date().getTime());
+						}else if(data[0][7] == "error") {
+							alert("已经存在的用户名!");
+							$("#viritycode_img").attr("src", "/captcha?image="+new Date().getTime());
+						}else{
+							alert("注册失败");
+							location.reload();
 						}
 					}
 				});

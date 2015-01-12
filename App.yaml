@@ -1,0 +1,12 @@
+appid: 996678819
+ setenv: {'JVM_ARGS' : '-Dmyproperties=value1 -XDebug'}
+start: $JETTY_START
+try_restart: 
+    enable: false
+web_health: true
+web_health_conf: 
+    path: /
+    timeout: 2000ms
+    success: [200,201,403,301,302]
+tcp_health: false
+tcp_health_port: [8001,8001]

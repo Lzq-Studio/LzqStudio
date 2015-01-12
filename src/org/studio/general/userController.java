@@ -5,9 +5,12 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import net.sf.json.JSONObject;
+import org.springframework.web.util.HtmlUtils;
 import org.studio.idcode.MyCaptchaRender;
 import org.studio.interceptor.UserInterceptor;
 import org.studio.utils.JsonUtils;
+import org.studio.vo.userVO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +57,34 @@ public class userController extends Controller{
             long nUser = Db.queryLong("select count(*) from userinfo") +1 ;
             String strUser = String.format("%03d", nUser);
             System.out.println(strUser);
+
+            String userName = param.getString("userName");
+            String userPass = param.getString("userPass");
+            if(userName != null){
+                if(-1 != userName.indexOf(' '))
+                {
+                    return;
+                }
+            }else{
+                return;
+            }
+
+            if(userPass != null){
+                if(-1 != userPass.indexOf(' '))
+                {
+                    return;
+                }
+            }else{
+                return;
+            }
+
+            userinfo users = userinfo.dao.findFirst("select * from userinfo where userName=\""+userName+"\"");
+            System.out.println(users);
+            if(users !=null){
+                renderJson("[{\"7\":\"error\"}]");
+                return;
+            }
+
             Record record = new Record();
             record.set("userId",strUser);
             record.set("userName",param.get("userName"));
@@ -111,13 +142,17 @@ public class userController extends Controller{
             String json = getParaMap().keySet().toString();
             JSONObject param = JsonUtils.Object4JsonString(json);
 
-            userinfo.dao.findById(param.get("userIdForInfo")).set("userSex",param.get("newSex")).update();
+            String userId = getSessionAttr("dataId");
+            String predate= userinfo.dao.findById(userId).get("regDate").toString();
+            userinfo.dao.findById(userId).set("userSex",param.get("newSex")).update();
 
-            userinfo.dao.findById(param.get("userIdForInfo")).set("userMood",param.get("newMood")).update();
+            userinfo.dao.findById(userId).set("userMood",param.get("newMood")).update();
 
-            userinfo.dao.findById(param.get("userIdForInfo")).set("userMail",param.get("newMail")).update();
+            userinfo.dao.findById(userId).set("userMail",param.get("newMail")).update();
 
-            userinfo.dao.findById(param.get("userIdForInfo")).set("userIurl",param.get("newIurl")).update();
+            userinfo.dao.findById(userId).set("userIurl",param.get("newIurl")).update();
+            userinfo.dao.findById(userId).set("regDate",predate).update();
+
             //???????
             isOk = true;
             if (!isOk) {
@@ -159,9 +194,10 @@ public class userController extends Controller{
             String json = getParaMap().keySet().toString();
             JSONObject param = JsonUtils.Object4JsonString(json);
 
+            String userId = getSessionAttr("dataId");
             String oldPass = (String)param.get("oldPass");
             String newPass = (String)param.get("newPass");
-            userinfo user = userinfo.dao.findById(param.get("userIdForPass"));
+            userinfo user = userinfo.dao.findById(userId);
             if(oldPass.equals(user.getStr("userPass"))){
                 user.set("userPass", newPass).update();
                 isOk = true;
@@ -212,6 +248,64 @@ public class userController extends Controller{
         }
     }
 
+    public void getUserInfo(){
+        try{
+            String userId = getSessionAttr("dataId");
+            List<userinfo> info= userinfo.dao.find("select * from userinfo where userId='"+userId+"'");
+            List<userVO> userVOs = new ArrayList<userVO>();
+            for (userinfo user : info) {
+                userVO uVO = new userVO();
+
+                uVO.setRegDate(user.get("regDate").toString());
+                uVO.setUserId(Integer.toString(user.getInt("userId")));
+                uVO.setUserMail(user.getStr("userMail"));
+                uVO.setUserMood(user.getStr("userMood"));
+                uVO.setUserName(user.getStr("userName"));
+                uVO.setUserSex(user.getStr("userSex"));
+                uVO.setUserUrl(user.getStr("userIurl"));
+
+                userVOs.add(uVO);
+            }
+            if (userVOs.size() == 0) {
+                renderJson("[{\"1\":\"error\"}]");
+            } else {
+                renderJson(userVOs);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void getUserInfoById(){
+        try{
+            String json = getParaMap().keySet().toString();
+            JSONObject param = JsonUtils.Object4JsonString(json);
+            String userId = param.getString("dataId");
+            List<userinfo> info= userinfo.dao.find("select * from userinfo where userId='"+userId+"'");
+            List<userVO> userVOs = new ArrayList<userVO>();
+            for (userinfo user : info) {
+                userVO uVO = new userVO();
+
+                uVO.setRegDate(user.get("regDate").toString());
+                uVO.setUserId(Integer.toString(user.getInt("userId")));
+                uVO.setUserMail(user.getStr("userMail"));
+                uVO.setUserMood(user.getStr("userMood"));
+                uVO.setUserName(user.getStr("userName"));
+                uVO.setUserSex(user.getStr("userSex"));
+                uVO.setUserUrl(user.getStr("userIurl"));
+
+                userVOs.add(uVO);
+            }
+            if (userVOs.size() == 0) {
+                renderJson("[{\"1\":\"error\"}]");
+            } else {
+                renderJson(userVOs);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @Before(UserInterceptor.class)
     public void isLogin(){
         try {
@@ -229,4 +323,18 @@ public class userController extends Controller{
         }
     }
 
+    public void logout(){
+        try{
+            if(getSessionAttr("islogin") != null)
+                removeSessionAttr("islogin");
+            if(getSessionAttr("dataId") != null)
+                removeSessionAttr("dataId");
+            if(getSessionAttr("userName") != null)
+                removeSessionAttr("userName");
+            renderJson("[{\"6\":\"ok\"}]");
+        }catch (Exception e){
+            e.printStackTrace();
+            renderJson("[{\"500\":\"error\"}]");
+        }
+    }
 }

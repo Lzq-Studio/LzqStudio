@@ -72,9 +72,7 @@
 				</ol>
 				<h1 class="h3 title" id="title_g"></h1>
 				<div class="author">
-					<a class="mr5" href="">
-						<strong id="author_g"></strong>
-					</a>
+					<span id="author_g"></span>
 					<strong class="text-black mr10" id="clicknum_g"></strong><span id="time_g"></span>
 				</div>
 			</div>
@@ -237,7 +235,8 @@
 					$.each(data, function(idx, item) {
 						if (item.userid) {
 							$(".opts__item").hide();
-							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' target='_blank' href='/u/user.html'" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#isLogin').append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li class='opts__item'><button onclick='logout()' type='button' class='btn btn-primary btn-xs'>退出</button></li>");									
 							$('#author').html(item.username);
 							nowUser = item.username;
 						} else {
@@ -271,7 +270,7 @@
 			}
 
 
-			 //				获取内容  函数 传值 文章id
+			 //获取内容  函数 传值 文章id
 			function getConten(dataId) {
 				var request = {
 					"dataId": dataId
@@ -291,7 +290,8 @@
 							item.content = item.content.replace(/\*/g, "=");
 							$('#title_g').html(item.title);
 							$('#content_g').html(item.content);
-							$('#author_g').html(item.userName);
+
+							$('#author_g').append("<a class='mr5' href='/u/Who.html?id="+item.userId+"' target='_black' ><strong>"+item.userName+"</strong></a>");
 							$('#clicknum_g').html(item.clickNum);
 							$('#time_g').html(item.preDate);
 							document.title = item.title;
@@ -326,7 +326,7 @@
 						var end = "</div></article>";
 						$.each(data, function(idx, item) {
 							if (item.userName) {
-								commentUserName = "<strong><a class='mr5' href='' id='commentAuthor_g'>" + item.userName + "</a></strong>";
+								commentUserName = "<strong><a class='mr5' href='/u/Who.html?id="+item.userId+"' id='commentAuthor_g'>" + item.userName + "</a></strong>";
 								commentPreDate = "<span class='ml10 text-muted' id='ansTime_g'> " + item.preDate + " </span>";
 								commentContent = "<div class='answer fmt mt10'><p id='commentContent_g'>" + item.content.replace(/\*/g, "=") + "</p></div>";
 								$('#ans_g').append(begin + commentUserName + commentPreDate + commentContent + end);
@@ -365,6 +365,21 @@
 					}
 				});
 			}
+			
+			
+		//登出的先关函数
+		function logout(){
+			$.ajax({
+				type:"get",
+				url:"/n/user/logout",
+				datatype:"json",
+				error:function(){},
+				success:function(data){
+					window.location.href = "/NewList.html";
+				}
+			});
+		}
+			
 		</script>
 	</body>
 

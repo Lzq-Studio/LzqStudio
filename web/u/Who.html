@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no" />
+		<title></title>
+		<meta name="description" content="太原理工大学蓝之青团队" />
+		<meta name="keywords" content="太原理工大学蓝之青团队" />
+
+		<!--[if lt IE 9]>
+		    <script src="//static.segmentfault.com/global/js/html5shiv.js?"></script>
+		    <script src="//static.segmentfault.com/global/js/respond.js?"></script>
+		    <link rel="stylesheet" href="//static.segmentfault.com/global/css/ie.css?" />
+		<![endif]-->
+
+
+		<link rel="stylesheet" type="text/css" href="../css/user_all.css" />
+		<link rel="stylesheet" type="text/css" href="../css/qa_all.css" />
+		<link rel="stylesheet" href="../css/global.css" />
+		<!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.css">-->
+		<script src="../js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.json-2.4.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+
+	<body>
+		<!--全局导航-->
+		<div class="global-nav">
+			<nav class="container nav">
+				<h1 class="logo"><a href="#">SegmentFault</a></h1>
+
+				<form action="/search" class="header-search pull-left hidden-sm hidden-xs">
+					<button type="submit" class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span>
+					</button>
+					<input id="searchBox" name="q" placeholder="输入关键字搜索" class="form-control" type="text">
+				</form>
+
+				<ul class="menu list-inline pull-left hidden-xs">
+					<li class="menu__item"><a href="../HotList.html">问答</a>
+					</li>
+					<li class="menu__item"><a href="../HotList.html">文章</a>
+					</li>
+					<li class="menu__item"><a href="">资源</a>
+					</li>
+				</ul>
+				<ul class="opts pull-right list-inline hidden-xs" id="isLogin">
+					<li class="opts__item"><a id="sfLogin" href="/u/login.html" class="em ml10">直接登录</a>
+					</li>
+					<li class="opts__item"><a id="sfLogin" href="/u/register.html" class="em ml10">注册</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!--全局导航结束-->
+
+		<!--用户头，个人信息-->
+		<header class="bg-gray pt30">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="profile-header media">
+							<a class="pull-left" href="#">
+								<img class="media-object avatar-128" src="http://sfault-avatar.b0.upaiyun.com/582/731/582731498-54a573ff33c03_huge256" alt="apgmer" />
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading" id="username_u"></h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<ul class="list-unstyled profile-links">
+							<li id="email_u">邮箱：</li>
+							<li id="url_u">个人网站：
+								<a href="" target="_blank"></a>
+							</li>
+							<li id="join_u">注册时间：
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!--用户头，个人信息结束-->
+
+		<div class="wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 profile">
+						<div class="profile-bio mono">
+							<p id="userShow">个人简介都不给
+								<(￣ ﹌ ￣)>
+							</p>
+						</div>
+					</div>
+
+
+					<div class="col-md-8">
+						<h2 class="h4">所有文章</h2>
+						<div class="widget-active clearfix" id="content_u">
+
+							<!--用户个人文章-->
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<script type="text/javascript">
+		
+			 //获取id  url 传值
+			var key = "";
+			var url = location.href.split("?");
+			if (url[1] == null) {
+				window.location.href = "user.html";
+			}
+			var field = url[1].split("&");
+			for (i = 0; i < field.length; i++) {
+				var val = field[i].split("=");
+			}
+			getContent(val[1]);
+			getUserContent(val[1]);
+			
+			
+						//判断是否登录。请求后台   并且  修改右上角+加入姓名
+			$.ajax({
+				type: "get",
+				url: "/n/user/isLogin",
+				datatype: "json",
+				error: function() {
+					alert("需要登录")
+					window.location.href = "/u/login.html";
+				},
+				success: function(data) {
+					$.each(data, function(idx, item) {
+						if (item.userid) {
+							$(".opts__item").hide();
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' target='_blank' href='/u/user.html'" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#isLogin').append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li class='opts__item'><button onclick='logout()' type='button' class='btn btn-primary btn-xs'>退出</button></li>");
+						} else {
+							alert("需要登录");
+							window.location.href = "/u/login.html";
+						}
+
+					});
+				}
+			});
+
+			 //根据用户id获取本用户的相关信息个人信息
+			function getContent(id) {
+				var request = {
+					"dataId": id
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					url: "/n/user/getUserInfoById",
+					type: "POST",
+					data: jsonStr,
+					dataType: "json",
+					error: function() {
+						alert("error");
+					},
+					success: function(data) {
+						$.each(data, function(idx, item) {
+							$('#username_u').html(item.userName);
+							$('#email_u').append(item.userMail);
+							$('#url_u').append(item.userUrl);
+							$('#join_u').append(item.regDate);
+							if ($('#userShow')) {
+								$('#userShow').html(item.userMood);
+							}
+						});
+					}
+				});
+			}
+			
+			//根据用户id获取用户的文章
+			
+			function getUserContent(userId) {
+				var request = {
+					"dataId": userId
+				};
+				var jsonStr = $.toJSON(request);
+				$.ajax({
+					type: "post",
+					url: "/n/article/getArtByUser",
+					data: jsonStr,
+					datatype: "json",
+					error: function() {
+						window.location.href = "../u/login.html";
+					},
+					success: function(data) {
+						
+						if (data[0][1] == "error") {
+							$('#content_u').append("<h2>这家伙什么都没有贡献</h2>");
+						}else{
+							var preDate = "";
+							var contentTitle = "";
+							var content = "";
+							var begin = " <section class = 'widget-active__answer'> <div class = 'widget-active--left'> <span class = 'glyphicon glyphicon-comment'> </span></div> ";
+							var end = " </p></div> </section>";
+							$.each(data, function(idx, item) {
+								preDate = "<div class='widget-active--right'><p class='widget-active--right__info'>" + item.preDate + "&nbsp;&nbsp;&nbsp;&nbsp;点击量:" + item.clickNum + "</p> ";
+								contentTitle = "<div class = 'widget-active--right__title'> <h4> <a href = '/a/topic.html?id=" + item.artId + "' target='_black'> " + item.title + " </a></h4> </div>";
+								content = "<p class='widget-active--right__quote'>测试内容测试内容测试内容</p > "
+								$('#content_u').append(begin + preDate + contentTitle + content + end);
+							});
+						}
+					}
+				});
+			}
+			
+		//登出的先关函数
+		function logout(){
+			$.ajax({
+				type:"get",
+				url:"/n/user/logout",
+				datatype:"json",
+				error:function(){},
+				success:function(data){
+					window.location.href = "/NewList.html";
+				}
+			});
+		}
+			
+		</script>
+
+
+	</body>
+
+</html>

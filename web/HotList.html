@@ -198,7 +198,7 @@
 					var begin = "<section class='stream-list__item'><div class='summary'><ul class='author list-inline'><li>";
 					var end = "	</div></section>";
 					$.each(data, function(idx, item) {
-						resusername = "<a href=''>" + item.userName + "</a>";
+						resusername = "<a href='/u/Who.html?id="+item.userId+"' target='_black' >" + item.userName + "</a>";
 						resdate = "<span class='split'></span><span class='askDate'>" + item.preDate + "</span></li></ul>";
 						restitle = "<h2 class='title'><a href='javascript:content(" + item.artId + ")'>" + item.title + "</a></h2>";
 						$('#hot').append(begin + resusername + resdate + restitle + end);
@@ -217,7 +217,8 @@
 					$.each(data, function(idx,item) {
 						if(item.userid){
 							$(".opts__item").hide();
-							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' href='"+item.userid+"' class='em ml10'>"+item.username+"</a></li>");
+							$('#isLogin').append("<li class='opts__item'><a id='sfLogin' target='_blank' href='/u/user.html'" + item.userid + "' class='em ml10'>" + item.username + "</a></li>");
+							$('#isLogin').append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li class='opts__item'><button onclick='logout()' type='button' class='btn btn-primary btn-xs'>退出</button></li>");					
 						}
 					});
 				}
@@ -225,6 +226,19 @@
 
 		function content(id) {
 			window.open("a/topic.html?id=" + id);
+		}
+		
+		//登出的先关函数
+		function logout(){
+			$.ajax({
+				type:"get",
+				url:"/n/user/logout",
+				datatype:"json",
+				error:function(){},
+				success:function(data){
+					window.location.href = "/NewList.html";
+				}
+			});
 		}
 
 	</script>

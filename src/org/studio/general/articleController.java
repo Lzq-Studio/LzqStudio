@@ -254,6 +254,41 @@ public void getAll() {
             renderJson(articleVOs);
         }
     }
+
+
+    public void getArtByUser() {
+        /**
+         * 功能:
+         * --------------------------------------------
+         * */
+        String json = getParaMap().keySet().toString();
+        JSONObject param = JsonUtils.Object4JsonString(json);
+       // int page = Integer.parseInt(param.get("page").toString());
+      //  System.out.println(page);
+        String userId = param.getString("dataId");
+        List<articleVO> articleVOs = new ArrayList<articleVO>();
+        List<article> articleList = article.dao.find("select * from article where userid=\""+userId+"\"order by clickNum desc limit ?,? ;",0,pageVol);
+
+        for (article at : articleList) {
+            articleVO atVO = new articleVO();
+
+            atVO.setTitle(at.getStr("title"));
+            atVO.setArtId(Integer.toString(at.getInt("artId")));
+            atVO.setUserId(Integer.toString(at.getInt("userId")));
+            atVO.setUserName(at.getStr("userName"));
+            atVO.setPreDate((at.get("preDate")).toString());
+            atVO.setContent(HtmlUtils.htmlUnescape(at.getStr("content")));
+            atVO.setClickNum(Integer.toString(at.getInt("clickNum")));
+
+            articleVOs.add(atVO);
+        }
+        if (articleVOs.size() == 0) {
+            renderJson("[{\"1\":\"error\"}]");
+        } else {
+            renderJson(articleVOs);
+        }
+    }
+
     public void getPageCount(){
         try{
             Number num  = (Number)Db.query("select count(*) from article").get(0);
