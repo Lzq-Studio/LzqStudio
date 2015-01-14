@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="MySQL - lzqStudio@localhost" uuid="cbd32253-6870-4843-bd8c-6b427af113a7">
-    <database-info product="MySQL" version="5.5.40-0ubuntu1" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.22 ( Revision: ${bzr.revision-id} )">
-      <extra-name-characters>#@</extra-name-characters>
-      <identifier-quote-string>`</identifier-quote-string>
-    </database-info>
-    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
-    <schema name="" catalog="lzqStudio"/>
-    <table name="article" schema="" catalog="lzqStudio" type="TABLE">
-      <column name="artId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="userId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="title" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="userName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <column name="preDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
-      <column name="clickNum" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
-      <primary-key name="PRIMARY" columns="artId"/>
-    </table>
-    <table name="comment" schema="" catalog="lzqStudio" type="TABLE">
-      <column name="commentId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="articleId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="userName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="imageUrl" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <column name="preTime" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="commentId"/>
-    </table>
-    <table name="image" schema="" catalog="lzqStudio" type="TABLE">
-      <column name="imageId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="imageUrl" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="imageName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="userName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="preDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
-      <primary-key name="PRIMARY" columns="imageId"/>
-    </table>
-    <table name="message" schema="" catalog="lzqStudio" type="TABLE">
-      <column name="messageId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="userName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="content" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="preDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
-      <primary-key name="PRIMARY" columns="messageId"/>
-    </table>
-    <table name="userinfo" schema="" catalog="lzqStudio" type="TABLE">
-      <column name="userId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="userName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="userPass" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="userSex" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
-      <column name="userMood" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
-      <column name="userMail" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="regDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
-      <column name="userIurl" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="userId"/>
-    </table>
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
 </component>
